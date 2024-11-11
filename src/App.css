@@ -1,42 +1,89 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  width: 100%;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #333;
+  color: white;
+}
+
+.error-message {
+  color: red;
+  font-size: 0.9em;
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+
+.app-title {
+  font-size: 1.5em;
+  margin-bottom: 1rem;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+.summarize-button {
+  width: 100%;
+  padding: 0.75em;
+  font-size: 1em;
+  margin: 1rem 0;
+  cursor: pointer;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+}
+
+.summarize-button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.error-message {
+  color: red;
+  font-size: 0.9em;
+}
+
+/* App.css */
+.summary-container {
+  max-height: 200px;
+  overflow-y: auto;
+  text-align: center;
+}
+
+.summary-list {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.summary-item {
+  margin-bottom: 0.5rem;
+  text-align: left;
+}
+
+
+@media (max-width: 350px) {
+  .app-title {
+    font-size: 1.2em;
   }
-  to {
-    transform: rotate(360deg);
+
+  .summarize-button {
+    font-size: 0.9em;
+    padding: 0.5em;
   }
-}
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+  .reading-time {
+    font-size: 1em;
+    margin-bottom: 1rem;
+    /* Se necessario, aggiungi text-align: center; */
   }
-}
 
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+  .error-message {
+    font-size: 0.85em;
+  }
 }

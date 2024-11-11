@@ -1,5 +1,5 @@
 function ReadingTimeDisplay({ readingTime }) {
-    return <p>{readingTime}</p>;
+    return <p className="reading-time">{readingTime}</p>;
 }
 
 export default ReadingTimeDisplay;

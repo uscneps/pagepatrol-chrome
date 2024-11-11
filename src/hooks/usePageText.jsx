@@ -21,7 +21,7 @@ export function usePageText() {
                     },
                     (results) => {
                         if (chrome.runtime.lastError) {
-                            setError('Errore: ' + chrome.runtime.lastError.message);
+                            setError('Error: ' + chrome.runtime.lastError.message);
                             return;
                         }
 
@@ -29,10 +29,10 @@ export function usePageText() {
                             const text = results[0].result;
                             const wordCount = text.split(/\s+/).length;
                             const readingTimeMinutes = Math.ceil(wordCount / 200);
-                            setReadingTime(`Tempo di lettura approssimativo: ${readingTimeMinutes} minuto/i`);
+                            setReadingTime(`time needed to read the article: ${readingTimeMinutes} minuto/i`);
                             setPageText(text);
                         } else {
-                            setError('Impossibile recuperare il contenuto della pagina.');
+                            setError('impossible to get the text of the page');
                         }
                     }
                 );

@@ -1,10 +1,13 @@
+
 function SummaryDisplay({ summary }) {
     return (
-        <div>
-            <h2>Riassunto:</h2>
-            <ul>
+        <div className="summary-container">
+            <h2>Summary</h2>
+            <ul className="summary-list">
                 {summary.map((item, index) => (
-                    <li key={index}>{item}</li>
+                    <li key={index} className="summary-item">
+                        {item}
+                    </li>
                 ))}
             </ul>
         </div>
