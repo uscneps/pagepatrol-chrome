@@ -1,5 +1,4 @@
-
-function SummaryDisplay({ summary }) {
+function SummaryDisplay({summary}) {
     return (
         <div className="summary-container">
             <h2>Summary</h2>

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import {useState} from 'react';
 
 export function useSummarizer() {
     const [summary, setSummary] = useState([]);
@@ -57,5 +57,5 @@ export function useSummarizer() {
         }
     };
 
-    return { summary, isSummarizing, error, getSummary };
+    return {summary, isSummarizing, error, getSummary};
 }

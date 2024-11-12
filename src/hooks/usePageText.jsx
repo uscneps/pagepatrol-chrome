@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import {useState, useEffect} from 'react';
 
 export function usePageText() {
     const [pageText, setPageText] = useState('');
@@ -11,12 +11,12 @@ export function usePageText() {
         }
 
         if (window.chrome && chrome.tabs && chrome.scripting) {
-            chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+            chrome.tabs.query({active: true, currentWindow: true}, function (tabs) {
                 const activeTab = tabs[0];
 
                 chrome.scripting.executeScript(
                     {
-                        target: { tabId: activeTab.id },
+                        target: {tabId: activeTab.id},
                         func: getPageText,
                     },
                     (results) => {
@@ -42,5 +42,5 @@ export function usePageText() {
         }
     }, []);
 
-    return { pageText, readingTime, error };
+    return {pageText, readingTime, error};
 }
