@@ -1,89 +1,74 @@
-
 .app-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  width: 100%;
-  padding: 1rem;
-  box-sizing: border-box;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
 }
-
-body {
-  background-color: #333;
-  color: white;
-}
-
-.error-message {
-  color: red;
-  font-size: 0.9em;
-  text-align: center;
-}
-
 
 .app-title {
-  font-size: 1.5em;
-  margin-bottom: 1rem;
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    color: #646cff;
 }
 
-.summarize-button {
-  width: 100%;
-  padding: 0.75em;
-  font-size: 1em;
-  margin: 1rem 0;
-  cursor: pointer;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 4px;
+.error-message, .loading-message {
+    color: #ff4d4f;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
 }
 
-.summarize-button:disabled {
-  background-color: #cccccc;
-  cursor: not-allowed;
+.reading-time {
+    font-size: 1.2rem;
+    margin: 1rem 0;
+    color: #646cff;
 }
 
-.error-message {
-  color: red;
-  font-size: 0.9em;
-}
-
-/* App.css */
 .summary-container {
-  max-height: 200px;
-  overflow-y: auto;
-  text-align: center;
+    margin-top: 20px;
 }
 
 .summary-list {
-  list-style-type: none;
-  padding-left: 0;
+    list-style-type: none;
+    padding: 0;
 }
 
 .summary-item {
-  margin-bottom: 0.5rem;
-  text-align: left;
+    margin: 0.5rem 0;
+    padding: 0.75rem;
+    background-color: #f0f0f0;
+    border-radius: 8px;
+    color: #213547;
+    font-size: 1rem;
 }
 
+@media (max-width: 768px) {
+    .app-container {
+        padding: 15px;
+    }
 
-@media (max-width: 350px) {
-  .app-title {
-    font-size: 1.2em;
-  }
+    .app-title {
+        font-size: 2rem;
+    }
 
-  .summarize-button {
-    font-size: 0.9em;
-    padding: 0.5em;
-  }
+    .reading-time, .error-message, .loading-message {
+        font-size: 1rem;
+    }
 
-  .reading-time {
-    font-size: 1em;
-    margin-bottom: 1rem;
-    /* Se necessario, aggiungi text-align: center; */
-  }
+    .summary-item {
+        font-size: 0.95rem;
+    }
+}
 
-  .error-message {
-    font-size: 0.85em;
-  }
+@media (max-width: 480px) {
+    .app-title {
+        font-size: 1.8rem;
+    }
+
+    .reading-time, .error-message, .loading-message {
+        font-size: 0.9rem;
+    }
+
+    .summary-item {
+        font-size: 0.9rem;
+    }
 }

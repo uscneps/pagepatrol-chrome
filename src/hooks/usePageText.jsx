@@ -29,7 +29,7 @@ export function usePageText() {
                             const text = results[0].result;
                             const wordCount = text.split(/\s+/).length;
                             const readingTimeMinutes = Math.ceil(wordCount / 200);
-                            setReadingTime(`time needed to read the article: ${readingTimeMinutes} minuto/i`);
+                            setReadingTime(`time needed to read the article: ${readingTimeMinutes} minutes`);
                             setPageText(text);
                         } else {
                             setError('impossible to get the text of the page');

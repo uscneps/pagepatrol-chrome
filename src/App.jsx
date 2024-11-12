@@ -9,7 +9,6 @@ function App() {
     const { pageText, readingTime, error: pageTextError } = usePageText();
     const { summary, isSummarizing, error: summarizerError, getSummary } = useSummarizer();
 
-    // automatically summarize the page text when it is available
     useEffect(() => {
         if (pageText) {
             getSummary(pageText);
@@ -18,11 +17,18 @@ function App() {
 
     return (
         <div className="app-container">
-            <h1 className="app-title">Page Patrol</h1>
+            <h1 className="app-title">Page Patrol !</h1>
             {pageTextError && <p className="error-message">{pageTextError}</p>}
             {readingTime && <ReadingTimeDisplay readingTime={readingTime} />}
             {summarizerError && <p className="error-message">{summarizerError}</p>}
-            {summary.length > 0 && <SummaryDisplay summary={summary} />}
+
+            {isSummarizing ? (
+                <p className="loading-message">Caricamento in corso...</p>
+            ) : (
+                summary.length > 0 && <SummaryDisplay summary={summary} />
+            )}
+
+
         </div>
     );
 }
