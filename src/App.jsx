@@ -17,16 +17,19 @@ function App() {
 
     return (
         <div className="app-container">
-            <h1 className="app-title">Page Patrol !</h1>
+            <h1 className="app-title">Page Patrol 🧭</h1>
             {pageTextError && <p className="error-message">{pageTextError}</p>}
             {readingTime && <ReadingTimeDisplay readingTime={readingTime} />}
             {summarizerError && <p className="error-message">{summarizerError}</p>}
 
             {isSummarizing ? (
-                <p className="loading-message">Caricamento in corso...</p>
+                <p className="loading-message">
+                    <span className="spinner">🧭</span>
+                </p>
             ) : (
                 summary.length > 0 && <SummaryDisplay summary={summary} />
             )}
+
 
 
         </div>
