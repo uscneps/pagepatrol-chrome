@@ -3,15 +3,16 @@ function SummaryDisplay({ summary }) {
     return (
         <div className="summary-container">
             <h2>Summary</h2>
-            <ul className="summary-list" style={{textAlign: 'center'}}>
+            <div className="summary-content">
                 {summary.map((item, index) => (
-                    <li key={index} className="summary-item">
+                    <p key={index} className="summary-paragraph">
                         {item}
-                    </li>
+                    </p>
                 ))}
-            </ul>
+            </div>
         </div>
     );
 }
+
 
 export default SummaryDisplay;
