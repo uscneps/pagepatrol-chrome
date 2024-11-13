@@ -1,9 +1,16 @@
-import {useState} from 'react';
+import { useState } from 'react';
 
 export function useSummarizer() {
     const [summary, setSummary] = useState([]);
     const [isSummarizing, setIsSummarizing] = useState(false);
     const [error, setError] = useState('');
+
+    const options = {
+        sharedContext: 'This is an article, your job is to introduce the article and talk about the main points',
+        type: 'key-points',
+        format: 'plain-text',
+        length: 'medium',
+    };
 
     const cleanText = (text) => {
         let summaryPoints = text.split('\n');
@@ -28,14 +35,14 @@ export function useSummarizer() {
         setIsSummarizing(true);
 
         try {
-            const canSummarize = await ai.summarizer.capabilities();
+            const canSummarize = await self.ai.summarizer.capabilities();
             let summarizer;
 
             if (canSummarize && canSummarize.available !== 'no') {
                 if (canSummarize.available === 'readily') {
-                    summarizer = await ai.summarizer.create();
+                    summarizer = await self.ai.summarizer.create(options);
                 } else {
-                    summarizer = await ai.summarizer.create();
+                    summarizer = await self.ai.summarizer.create();
                     summarizer.addEventListener('downloadprogress', (e) => {
                         console.log(`Download progress: ${e.loaded}/${e.total}`);
                     });
@@ -57,5 +64,10 @@ export function useSummarizer() {
         }
     };
 
-    return {summary, isSummarizing, error, getSummary};
+    return {
+        summary,
+        isSummarizing,
+        error,
+        getSummary,
+    };
 }
