@@ -16,7 +16,7 @@ I used Prompt & Summary API, after joined the preview program i start to build a
 Currently im struggling with articles that include many images or code. 
 
 ## Accomplishments that we're proud of
-We’re proud of creating a tool that can enhance reading engagement, especially for users who are short on time. The AI-driven summaries and topic suggestions add a personalized touch to content consumption, making complex information accessible. Successfully implementing a seamless, user-friendly design that feels intuitive was also a big accomplishment.
+i'm proud of creating a tool that can enhance reading engagement, especially for users who are short on time. The AI-driven summaries and topic suggestions add a personalized touch to content consumption, making complex information accessible. Successfully implementing a seamless, user-friendly design that feels intuitive was also a big accomplishment.
 
 ## What we learned
 i learned about the importance of refining AI model outputs to achieve human-like quality in summaries. Additionally, we gained experience in optimizing UI/UX for dynamic content and became more adept at state management to handle asynchronous AI processing without impacting the user experience.
