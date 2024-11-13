@@ -1,42 +1,93 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+.app-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+    font-family: 'Open Sans';
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+
+.app-title {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.error-message, .loading-message {
+    margin-bottom: 1rem;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.reading-time {
+    margin: 1rem 0;
 }
 
-.card {
-  padding: 2em;
+.summary-container {
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: left;
+    max-width: 600px;
+
+    /* Subtle elevation effect */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Adjust opacity for desired depth */
 }
 
-.read-the-docs {
-  color: #888;
+
+.summary-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.date-display,
+.other-topic-display,
+.summary-paragraph {
+    margin-bottom: 0.6rem;
+    line-height: 1.5;
+    font-size: 1rem;
+    text-align: justify;
+}
+
+.spinner {
+    display: inline-block;
+    animation: spin 1s linear infinite;
+    font-size: 1.5em; /* Adjust size as needed */
+    margin-right: 5px; /* Adds space between emoji and "Loading..." text */
+}
+
+/* Keyframes for rotating animation */
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+
+@media (max-width: 768px) {
+    .app-container {
+        padding: 15px;
+    }
+
+    .reading-time, .error-message, .loading-message {
+        font-size: 1rem;
+    }
+
+    .summary-paragraph {
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .app-title {
+        font-size: 1.8rem;
+    }
+
+    .reading-time, .error-message, .loading-message {
+        font-size: 0.9rem;
+    }
+
+    .summary-paragraph {
+        font-size: 0.9rem;
+    }
 }
