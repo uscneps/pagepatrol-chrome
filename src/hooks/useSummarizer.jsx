@@ -5,6 +5,7 @@ export function useSummarizer() {
     const [isSummarizing, setIsSummarizing] = useState(false);
     const [error, setError] = useState('');
     const [date, setDate] = useState()
+    const [otherTopic, setOtherTopic] = useState();
 
     const optionsSummary = {
         sharedContext: 'This is an article, your job is to introduce the article and talk about the main points',
@@ -13,7 +14,8 @@ export function useSummarizer() {
         length: 'short',
     };
 
-    const cleanText = (text) => {
+
+    const cleanSummaryText = (text) => {
         let summaryPoints = text.split('\n');
         let cleanedSummary = summaryPoints
             .map((point) => {
@@ -27,9 +29,22 @@ export function useSummarizer() {
         setSummary(cleanedSummary);
     };
 
+    function cleanOtherTopicText(inputText) {
+        const points = inputText.split(/\d+\.\s*/).filter(point => point.trim() !== "");
+
+        const cleanedPoints = points.map(point => {
+            return point.replace(/\*\*/g, '').trim();
+        });
+
+        const formattedText = cleanedPoints.join("\n\n");
+
+        setOtherTopic(formattedText);
+    }
+
+
     const getSummary = async (pageText) => {
         if (!pageText) {
-            alert('no content to summarize');
+            alert('No content to summarize');
             return;
         }
 
@@ -39,37 +54,28 @@ export function useSummarizer() {
             const canSummarize = await self.ai.summarizer.capabilities();
             let summarizer;
             let dater;
-            let connectedElements;
 
             if (canSummarize && canSummarize.available !== 'no') {
-                if (canSummarize.available === 'readily') {
-                    summarizer = await self.ai.summarizer.create(optionsSummary);
-                    dater = await self.ai.languageModel.create();
-                } else {
-                    summarizer = await self.ai.summarizer.create(optionsSummary);
-                    dater = await self.ai.languageModel.create();
+                summarizer = await self.ai.summarizer.create(optionsSummary);
+                dater = await self.ai.languageModel.create();
 
-                    summarizer.addEventListener('downloadprogress', (e) => {
-                        console.log(`Download progress: ${e.loaded}/${e.total}`);
-                    });
-                    await summarizer.ready;
-                    await dater.ready;
-                }
+                const resultOfDate = await dater.prompt("Provide the date for the following text. Only include the date, nothing else." + pageText);
+                setDate(resultOfDate);
 
-                const resultOfDate = await dater.prompt("Provide the date for the following text. Only include the date, nothing else."+pageText);
-                setDate(resultOfDate)
+                const otherTopic = await dater.prompt("list MAX 5 correlated topics regards the following text: " + pageText);
+                cleanOtherTopicText(otherTopic)
                 dater.destroy();
 
                 const resultOfSummary = await summarizer.summarize(pageText);
-                cleanText(resultOfSummary);
+                cleanSummaryText(resultOfSummary);
                 summarizer.destroy();
 
             } else {
-                setError('summary is not available');
+                setError('Summary is not available');
             }
         } catch (error) {
-            console.error('error during summary', error);
-            setError('an error occurred during the summary');
+            console.error('Error during summary', error);
+            setError('An error occurred during the summary');
         } finally {
             setIsSummarizing(false);
         }
@@ -79,6 +85,7 @@ export function useSummarizer() {
         summary,
         date,
         isSummarizing,
+        otherTopic,
         error,
         getSummary,
     };

@@ -2,12 +2,12 @@ import { useEffect } from 'react';
 import { usePageText } from './hooks/usePageText';
 import { useSummarizer } from './hooks/useSummarizer';
 import ReadingTimeDisplay from './components/ReadingTimeDisplay';
-import SummaryDisplay from './components/SummaryDisplay';
+import MarkdownDisplay from './components/MarkdownDisplay'; // Only MarkdownDisplay needed now
 import './App.css';
 
 function App() {
     const { pageText, readingTime, error: pageTextError } = usePageText();
-    const { summary, date, isSummarizing, error: summarizerError, getSummary } = useSummarizer();
+    const { summary, date, isSummarizing, otherTopic, error: summarizerError, getSummary } = useSummarizer();
 
     useEffect(() => {
         if (pageText) {
@@ -28,13 +28,9 @@ function App() {
                 </p>
             ) : (
                 <>
-                    {summary.length > 0 && <SummaryDisplay summary={summary} />}
-                    {date && (
-                        <div className="poem-display">
-                            <h2>is up to date?</h2>
-                            <p>{date}</p>
-                        </div>
-                    )}
+                    {summary.length > 0 && <MarkdownDisplay title="Summary" content={summary} />}
+                        {date && <MarkdownDisplay title="Is up to date?" content={date} />}
+                        {otherTopic && <MarkdownDisplay title="Correlated Topics" content={otherTopic} />}
                 </>
             )}
         </div>
