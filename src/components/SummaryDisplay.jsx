@@ -1,17 +1,19 @@
-function SummaryDisplay({summary}) {
+import React from 'react';
+import ReactMarkdown from 'react-markdown';
+
+function SummaryDisplay({ summary }) {
     return (
         <div className="summary-container">
             <h2>Summary</h2>
             <div className="summary-content">
                 {summary.map((item, index) => (
-                    <p key={index} className="summary-paragraph">
+                    <ReactMarkdown key={index} className="summary-paragraph">
                         {item}
-                    </p>
+                    </ReactMarkdown>
                 ))}
             </div>
         </div>
     );
 }
-
 
 export default SummaryDisplay;
