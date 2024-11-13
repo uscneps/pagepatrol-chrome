@@ -1,4 +1,4 @@
-# pagepatrol-chrome (Google Chrome Built-in AI Challenge)
+# pagepatrol-chrome 🧭 (Google Chrome Built-in AI Challenge)
 Page Patrol aims to gently introduce the reader to the article by offering a clear summary of key points, suggesting related topics, and providing other relevant insights.
 
 ## Inspiration
@@ -26,3 +26,9 @@ i learned about the importance of refining AI model outputs to achieve human-lik
 - Implementing advanced customization options for summaries, so users can adjust the summary length and style.
 - Integrating sentiment analysis and tone indicators to give readers additional context about the content's tone.
 - Enhancing related topic suggestions with deeper topic clustering for more nuanced recommendations
+
+
+# how run it ? 
+- ```npm install```
+- ```npm run build```
+- load the build directory as a chrome extensions (in Google Chrome canary for the moment)
