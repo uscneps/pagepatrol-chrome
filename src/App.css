@@ -6,10 +6,14 @@
     font-family: 'Open Sans';
 }
 
-
 .app-title {
     font-size: 2rem;
     margin-bottom: 1.5rem;
+}
+
+.app-description {
+    text-align: justify;
+    margin: 1rem 0;
 }
 
 .error-message, .loading-message {
@@ -27,8 +31,7 @@
     text-align: left;
     max-width: 600px;
 
-    /* Subtle elevation effect */
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Adjust opacity for desired depth */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 
@@ -49,11 +52,10 @@
 .spinner {
     display: inline-block;
     animation: spin 1s linear infinite;
-    font-size: 1.5em; /* Adjust size as needed */
-    margin-right: 5px; /* Adds space between emoji and "Loading..." text */
+    font-size: 1.5em;
+    margin-right: 5px;
 }
 
-/* Keyframes for rotating animation */
 @keyframes spin {
     0% {
         transform: rotate(0deg);
@@ -62,7 +64,6 @@
         transform: rotate(360deg);
     }
 }
-
 
 @media (max-width: 768px) {
     .app-container {

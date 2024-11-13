@@ -1,21 +1,19 @@
 import { useState } from 'react';
 
 export function useSummarizer() {
-    const [summary, setSummary] = useState([]);
+    const [keyPointsSummary, setKeyPointsSummary] = useState([]);
     const [isSummarizing, setIsSummarizing] = useState(false);
     const [error, setError] = useState('');
-    const [date, setDate] = useState()
-    const [otherTopic, setOtherTopic] = useState();
+    const [relatedTopics, setRelatedTopics] = useState();
 
-    const optionsSummary = {
+    const summarizerOptions = {
         sharedContext: 'This is an article, your job is to introduce the article and talk about the main points',
         type: 'key-points',
         format: 'markdown',
         length: 'short',
     };
 
-
-    const cleanSummaryText = (text) => {
+    const processSummaryText = (text) => {
         let summaryPoints = text.split('\n');
         let cleanedSummary = summaryPoints
             .map((point) => {
@@ -26,10 +24,10 @@ export function useSummarizer() {
                 }
             })
             .filter((point) => point !== null);
-        setSummary(cleanedSummary);
+        setKeyPointsSummary(cleanedSummary);
     };
 
-    function cleanOtherTopicText(inputText) {
+    function formatRelatedTopicsText(inputText) {
         const points = inputText.split(/\d+\.\s*/).filter(point => point.trim() !== "");
 
         const cleanedPoints = points.map(point => {
@@ -38,11 +36,10 @@ export function useSummarizer() {
 
         const formattedText = cleanedPoints.join("\n\n");
 
-        setOtherTopic(formattedText);
+        setRelatedTopics(formattedText);
     }
 
-
-    const getSummary = async (pageText) => {
+    const fetchContentSummary = async (pageText) => {
         if (!pageText) {
             alert('No content to summarize');
             return;
@@ -56,18 +53,15 @@ export function useSummarizer() {
             let dater;
 
             if (canSummarize && canSummarize.available !== 'no') {
-                summarizer = await self.ai.summarizer.create(optionsSummary);
+                summarizer = await self.ai.summarizer.create(summarizerOptions);
                 dater = await self.ai.languageModel.create();
 
-                const resultOfDate = await dater.prompt("Provide the date for the following text. Only include the date, nothing else." + pageText);
-                setDate(resultOfDate);
-
-                const otherTopic = await dater.prompt("list MAX 5 correlated topics regards the following text: " + pageText);
-                cleanOtherTopicText(otherTopic)
+                const relatedTopicsText = await dater.prompt("List up to 5 related topics concerning the following text. Provide only the list, nothing else." + pageText);
+                formatRelatedTopicsText(relatedTopicsText);
                 dater.destroy();
 
                 const resultOfSummary = await summarizer.summarize(pageText);
-                cleanSummaryText(resultOfSummary);
+                processSummaryText(resultOfSummary);
                 summarizer.destroy();
 
             } else {
@@ -82,11 +76,10 @@ export function useSummarizer() {
     };
 
     return {
-        summary,
-        date,
+        keyPointsSummary,
         isSummarizing,
-        otherTopic,
+        relatedTopics,
         error,
-        getSummary,
+        fetchContentSummary,
     };
 }
