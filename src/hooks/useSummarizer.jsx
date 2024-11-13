@@ -4,12 +4,13 @@ export function useSummarizer() {
     const [summary, setSummary] = useState([]);
     const [isSummarizing, setIsSummarizing] = useState(false);
     const [error, setError] = useState('');
+    const [date, setDate] = useState()
 
-    const options = {
+    const optionsSummary = {
         sharedContext: 'This is an article, your job is to introduce the article and talk about the main points',
         type: 'key-points',
-        format: 'plain-text',
-        length: 'medium',
+        format: 'markdown',
+        length: 'short',
     };
 
     const cleanText = (text) => {
@@ -37,22 +38,32 @@ export function useSummarizer() {
         try {
             const canSummarize = await self.ai.summarizer.capabilities();
             let summarizer;
+            let dater;
+            let connectedElements;
 
             if (canSummarize && canSummarize.available !== 'no') {
                 if (canSummarize.available === 'readily') {
-                    summarizer = await self.ai.summarizer.create(options);
+                    summarizer = await self.ai.summarizer.create(optionsSummary);
+                    dater = await self.ai.languageModel.create();
                 } else {
-                    summarizer = await self.ai.summarizer.create();
+                    summarizer = await self.ai.summarizer.create(optionsSummary);
+                    dater = await self.ai.languageModel.create();
+
                     summarizer.addEventListener('downloadprogress', (e) => {
                         console.log(`Download progress: ${e.loaded}/${e.total}`);
                     });
                     await summarizer.ready;
+                    await dater.ready;
                 }
 
-                const result = await summarizer.summarize(pageText);
-                cleanText(result);
+                const resultOfDate = await dater.prompt("Provide the date for the following text. Only include the date, nothing else."+pageText);
+                setDate(resultOfDate)
+                dater.destroy();
 
+                const resultOfSummary = await summarizer.summarize(pageText);
+                cleanText(resultOfSummary);
                 summarizer.destroy();
+
             } else {
                 setError('summary is not available');
             }
@@ -66,6 +77,7 @@ export function useSummarizer() {
 
     return {
         summary,
+        date,
         isSummarizing,
         error,
         getSummary,
