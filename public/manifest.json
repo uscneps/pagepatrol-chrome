@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "React Chrome Extension",
+  "name": "Page Patrol",
   "version": "1.0.0",
-  "description": "A simple React app as a Chrome extension",
+  "description": "Page Patrol is a browser extension that allows you get a summary of the page you are currently viewing.",
   "action": {
     "default_popup": "index.html"
   },
